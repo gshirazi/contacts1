@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package service;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "github.com/lyft/protoc-gen-validate/validate/validate.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
+
+
+option go_package = "contacts1/pkg/pb;pb";
+
+// The Contacts1 service, GetVersion RPC, and Version message
+// make up a simple "starter" example. It allows the Atlas CLI to generate an
+// end-to-end example for the sake of demonstration. Feel free to change 
+// GetVersion to better-suit how your versioning system, or get rid of it entirely.
+
+// Here are some helpful resources to aid you in your protobuf quest:
+// https://github.com/infobloxopen/atlas-contacts-app/blob/master/proto/contacts.proto
+// https://developers.google.com/protocol-buffers/docs/proto
+// https://github.com/grpc-ecosystem/grpc-gateway
+// https://developers.google.com/protocol-buffers/docs/style
+
+// Happy protobuffing!
+
+// TODO: Write a protobuf schema for the Contacts1 service. The 
+// messages and RPCs will compose the API for the service.
+
+// TODO: Structure your own protobuf messages. Each protocol buffer message is a
+// small logical record of information, containing a series of name-value pairs.
+message VersionResponse {
+  string version = 1;
+}
+
+// Contact represents a particular person in an contacts list.
+message Contact {
+    option (gorm.opts).ormable = true;
+
+    // The id associated to the person
+    int64 id = 1;
+
+    // The first name of the person.
+    string first_name = 2;
+
+    // The middle name of the person.
+    string middle_name = 3;
+
+    // The last name of the person.
+    string last_name = 4;
+
+    // The person's primary email.
+    string email = 5;
+
+    // The home address of the person.
+    string home_address = 6;
+}
+
+message ReverseRequest {
+    Contact payload = 1;
+}
+
+message ReverseResponse {
+    string result = 1;
+}
+
+message CreateContactRequest {
+    Contact payload = 1;
+}
+
+message CreateContactResponse {
+    Contact result = 1;
+}
+
+message ReadContactRequest {
+    int64 id = 1;
+}
+
+message ReadContactResponse {
+    Contact result = 1;
+}
+
+message UpdateContactRequest {
+    Contact payload = 1;
+}
+
+message UpdateContactResponse {
+    Contact result = 1;
+}
+
+message DeleteContactRequest {
+    int64 id = 1;
+}
+
+message DeleteContactResponse {}
+
+
+// TODO: Define the Contacts1 service and its methods. Feel free
+// to change the name of Contacts1 to better-suit your naming
+// conventions.
+service Contacts1 {
+    option (gorm.server).autogen = true;
+
+    rpc GetVersion (google.protobuf.Empty) returns (VersionResponse) {
+        // TODO: Provide mappings between REST endpoints and service methods.
+        option (google.api.http) = {
+          get: "/version"
+        };
+    }
+
+    rpc Reverse (ReverseRequest) returns (ReverseResponse) {
+    option (google.api.http) = {
+          post: "/reverse"
+          body: "payload"
+        };
+    }
+
+    // Use this method to create a contact information.
+    rpc Create (CreateContactRequest) returns (CreateContactResponse) {
+        option (google.api.http) = {
+            post: "/contacts"
+            body: "payload"
+        };
+    }
+
+    // Use this method to read a contact information by identifier.
+    rpc Read (ReadContactRequest) returns (ReadContactResponse) {
+        option (google.api.http) = {
+            get: "/contacts/{id}"
+        };
+    }
+
+    // Use this method to update a contact information.
+    rpc Update (UpdateContactRequest) returns (UpdateContactResponse) {
+        option (google.api.http) = {
+            put: "/contacts/{payload.id}"
+            body: "payload"
+            additional_bindings: {
+                patch: "/contacts/{payload.id}"
+                body: "payload"
+            }
+        };
+    }
+
+    // Use this method to delete a particular contact.
+    rpc Delete (DeleteContactRequest) returns (DeleteContactResponse) {
+        option (google.api.http) = {
+            delete: "/contacts/{id}"
+        };
+        option (gorm.method).object_type = "Contact";
+    }
+}
