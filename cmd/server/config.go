@@ -24,7 +24,7 @@ const (
 	defaultDatabaseAddress  = "0.0.0.0" //"localhost" //"192.168.65.1" //"0.0.0.0"
 	defaultDatabasePort     = "5432"
 	defaultDatabaseName     = "postgres"
-	defaultDatabaseUser     = "gshirazi" //"postgres" //"gshirazi"
+	defaultDatabaseUser     = "postgres" //"gshirazi"
 	defaultDatabasePassword = "postgres"
 	defaultDatabaseSSL      = "disable"
 	defaultDatabaseOption   = ""
