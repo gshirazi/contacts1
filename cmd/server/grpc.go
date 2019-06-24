@@ -2,9 +2,10 @@ package main
 
 import (
 	"time"
-	"contacts1/pkg/pb"
-	"contacts1/pkg/svc"
-
+	//"contacts1/pkg/pb"
+	//"contacts1/pkg/svc"
+	"github.com/gshirazi/contacts1/pkg/pb"
+	"github.com/gshirazi/contacts1/pkg/svc"
 	"github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/grpc-ecosystem/go-grpc-middleware/validator"
