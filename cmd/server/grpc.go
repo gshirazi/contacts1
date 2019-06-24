@@ -2,12 +2,12 @@ package main
 
 import (
 	"time"
+	"contacts1/pkg/pb"
+	"contacts1/pkg/svc"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/grpc-ecosystem/go-grpc-middleware/validator"
-	"github.com/gshirazi/contacts1/pkg/pb"
-	"github.com/gshirazi/contacts1/pkg/svc"
 	"github.com/infobloxopen/atlas-app-toolkit/gateway"
 	"github.com/infobloxopen/atlas-app-toolkit/requestid"
 	"github.com/jinzhu/gorm"

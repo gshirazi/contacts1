@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"github.com/gshirazi/contacts1/pkg/pb"
+	"contacts1/pkg/pb"
 	"log"
 	"net"
 	"net/http"

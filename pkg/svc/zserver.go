@@ -2,8 +2,8 @@ package svc
 
 import (
 	"context"
+	"contacts1/pkg/pb"
 
-	"github.com/gshirazi/contacts1/pkg/pb"
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/jinzhu/gorm"
 )
